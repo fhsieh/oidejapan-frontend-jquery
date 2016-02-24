@@ -1,0 +1,72 @@
+@import "../../node_modules/susy/sass/susy";
+@import "../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "globals";
+
+$helpbar-primary-color: "red";
+
+$helpbar-header-fg-color: #fff !default;
+$helpbar-header-bg-color: color($helpbar-primary-color, "500") !default;
+$helpbar-header-bg-color-hover: color($helpbar-primary-color, "600") !default;
+$helpbar-header-font-size: 20px !default;
+$helpbar-header-border: 1px color($helpbar-primary-color, "700") solid !default;
+
+$helpbar-body-bg-color: color($ui-color, "100") !default;
+
+/**
+ * Helpbar
+ */
+#helpbar {
+  background-color: $helpbar-body-bg-color;
+
+  .header {
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+    height: $header-height;
+    color: $helpbar-header-fg-color;
+    background-color: $helpbar-header-bg-color;
+    border-bottom: $helpbar-header-border;
+
+    .title {
+      flex-grow: 1;
+      padding-left: 15px;
+      font-size: $helpbar-header-font-size;
+      font-weight: 500;
+    }
+
+    .addon {
+      flex-grow: 0;
+      width: $header-height;
+      border-left: $helpbar-header-border;
+
+      a {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        height: $header-height;
+        color: $helpbar-header-fg-color;
+        outline: none;
+        &:hover {
+          background-color: $helpbar-header-bg-color-hover;
+        }
+
+        > i.fa {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .body {
+    box-sizing: border-box;
+    padding: 15px;
+    overflow-y: auto;
+  }
+}
+
+#helpbar-open {
+  i.fa {
+    font-size: 28px !important;
+  }
+}

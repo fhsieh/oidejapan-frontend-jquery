@@ -1,0 +1,29 @@
+$fl-css-path: '../img/flags' !default;
+
+.fl {
+  position: relative;
+  display: inline-block;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: (4 / 3) * 1em;
+  line-height: 1em;
+  &:before {
+    content: '\00a0';
+  }
+}
+
+@mixin fl($country) {
+  .fl-#{$country} {
+    background-image: url(#{$fl-css-path}/#{$country}.svg);
+  }
+}
+
+@include fl(en);
+@include fl(es);
+@include fl(id);
+@include fl(ja);
+@include fl(ko);
+@include fl(th);
+@include fl(zh);
+@include fl(zh-tw);

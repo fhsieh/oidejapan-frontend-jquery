@@ -1,0 +1,425 @@
+@import "../../node_modules/susy/sass/susy";
+@import "../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "globals";
+
+$header-bg-color: color($ui-color, "100") !default;
+$header-border: 1px color($ui-color, "200") solid !default;
+
+$header-button-bg-color-hover: color($ui-color, "200") !default;
+$header-button-bg-color-active: color($ui-color, "800") !default;
+$header-button-border: $header-border !default;
+$header-button-fg-color: color($ui-color, "700") !default;
+$header-button-fg-color-active: #fff !default;
+$header-button-font-size: 13px !default;
+$header-button-icon-size: 18px !default;
+
+$header-user-image-size: 36px !default;
+
+$header-badge-fg-color: #fff !default;
+$header-badge-bg-color: color($ui-color, "400") !default;
+$header-badge-font-size: 12px !default;
+$header-badge-font-weight: 700 !default;
+
+$header-menu-arrow-size: 8px !default;
+$header-menu-width: 300px !default;
+$header-menu-border: 1px color($ui-color, "700") solid !default;
+
+$header-menu-height: 4.5em !default;
+$header-menu-icon-size: 36px !default;
+$header-menu-fg-color: color($ui-color, "300") !default;
+$header-menu-fg-color-hover: color($ui-color, "50") !default;
+$header-menu-bg-color: color($ui-color, "800") !default;
+$header-menu-bg-color-hover: color($ui-color, "700") !default;
+$header-menu-title-font-size: 18px !default;
+$header-menu-body-font-size: 12px !default;
+$header-menu-font-weight: 100 !default;
+$header-menu-more-color: color($ui-color, "500") !default;
+
+$header-menu-new-fg-color: #fff !default;
+$header-menu-new-fg-color-hover: $header-menu-new-fg-color !default;
+$header-menu-new-bg-color: $header-menu-bg-color !default;
+$header-menu-new-bg-color-hover: $header-menu-bg-color-hover !default;
+$header-menu-new-font-weight: 500 !default;
+
+$header-menu-muted-fg-color: color($ui-color, "300") !default;
+$header-menu-muted-fg-color-hover: color($ui-color, "100") !default;
+$header-menu-muted-bg-color: color($ui-color, "900") !default;
+$header-menu-muted-font-size: 12px !default;
+
+
+
+
+/**
+ * Mixins
+ */
+@mixin bgStatus($shade: "700") {
+  &.primary {
+    background-color: color("blue", $shade);
+  }
+  &.success {
+    background-color: color("green", $shade);
+  }
+  &.warning {
+    background-color: color("red", $shade);
+  }
+}
+
+/**
+ * Header
+ */
+#header {
+  background-color: $header-bg-color;
+  border-bottom: $header-border;
+
+  a {
+    position: relative;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+}
+
+/* buttons */
+#header > ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  > li {
+    border-right: $header-button-border;
+    &:last-child {
+      border-right: none;
+    }
+    &.flex {
+      flex: 1 0 0;
+    }
+
+    > a {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      min-width: $header-height;
+      height: $header-height;
+      color: $header-button-fg-color;
+      outline: none;
+      &:hover {
+        background-color: $header-button-bg-color-hover;
+      }
+      &.active {
+        color: $header-button-fg-color-active;
+        background-color: $header-button-bg-color-active;
+      }
+
+      > i.fa {
+        font-size: $header-button-icon-size;
+      }
+
+      > span {
+        font-size: $header-button-font-size;
+      }
+    }
+  }
+}
+
+/* badges */
+#header .badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px;
+  font-size: $header-badge-font-size;
+  font-weight: $header-badge-font-weight;
+  line-height: 1em;
+  color: $header-badge-fg-color;
+  background-color: $header-badge-bg-color;
+  border-radius: 8px;
+  @include shadow(2);
+  @include bgStatus;
+}
+
+/* menus */
+#header .menu {
+  position: absolute;
+  min-width: $header-menu-width;
+  margin-top: -9999px;
+  background-color: $header-menu-bg-color;
+  @include shadow(2);
+
+  // menu arrow
+  > li.arrow {
+    position: absolute;
+    top: -$header-menu-arrow-size;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: $header-menu-arrow-size transparent solid;
+    border-right: $header-menu-arrow-size transparent solid;
+    border-bottom: $header-menu-arrow-size $header-menu-bg-color solid;
+  }
+
+  // new and unread items
+  > li.item {
+    border-bottom: $header-menu-border;
+
+    > a {
+      display: flex;
+      align-items: center;
+      flex-flow: row nowrap;
+      padding-right: 36px;
+      font-weight: $header-menu-font-weight;
+      height: $header-menu-height;
+      color: $header-menu-fg-color;
+      &::after {
+        font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transform: translate(0, 0);
+        display: inline-block;
+        position: absolute;
+        content: "\f138";
+        top: calc(50% - 7px);
+        right: 11px;
+        color: $header-menu-more-color;
+      }
+      &:hover {
+        color: $header-menu-fg-color-hover;
+        background-color: $header-menu-bg-color-hover;
+      }
+
+      .gutter {
+        flex: 0 0 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i.fa {
+          width: $header-menu-icon-size;
+          height: $header-menu-icon-size;
+          line-height: $header-menu-icon-size;
+          font-size: 20px;
+          text-align: center;
+          border-radius: 50%;
+        }
+      }
+
+      span {
+        flex: 1;
+        font-size: $header-menu-title-font-size;
+        @include truncate;
+
+        small {
+          display: block;
+          font-size: $header-menu-body-font-size;
+          @include truncate;
+        }
+      }
+    }
+
+    &.new > a {
+      color: $header-menu-new-fg-color;
+      background-color: $header-menu-new-bg-color;
+      &:hover {
+        color: $header-menu-new-fg-color-hover;
+        background-color: $header-menu-new-bg-color-hover;
+
+        i.fa {
+          @include bgStatus("400");
+        }
+      }
+
+      i.fa {
+        color: #fff;
+        @include bgStatus("500");
+      }
+
+      span {
+        font-weight: $header-menu-new-font-weight;
+      }
+    }
+  }
+
+  // muted/footer items
+  > li.muted {
+    > a {
+      display: block;
+      padding-right: 15px;
+      font-size: $header-menu-muted-font-size;
+      font-weight: 500;
+      line-height: 3em;
+      text-align: right;
+      color: $header-menu-muted-fg-color;
+      background-color: $header-menu-muted-bg-color;
+      &:hover {
+        color: $header-menu-muted-fg-color-hover;
+      }
+
+      i.fa {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+/* user profile */
+#header #user {
+  padding: 0 6px 0 1em;
+  max-width: 200px;
+
+  // button image
+  > .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $header-user-image-size;
+    height: $header-user-image-size;
+    margin-left: 1em;
+    background-color: #fff;
+    border-radius: 50%;
+
+    i.fa.fa-user {
+      font-size: 20px;
+      color: color($active-color, "700");
+    }
+  }
+
+  // menu
+  + .menu {
+    > li.arrow {
+      border-bottom-color: color($active-color, "900");
+    }
+
+    > li:not(.arrow):not(.muted) {
+      border-bottom: $header-menu-border;
+    }
+
+    // basic metrics for company, profile, and balance
+    #company, #profile, #balance {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      color: color($ui-color, "100");
+
+      a {
+        padding: 0.3em 0.5em;
+        font-size: 0.85em;
+        color: color($ui-color, "100");
+        background-color: color($ui-color, "700");
+        &:hover {
+          color: #fff;
+          background-color: color($active-color, "700");
+        }
+      }
+    }
+
+    // company section
+    #company {
+      align-items: stretch !important;
+      border-bottom: none;
+      background-color: color($active-color, "900");
+      box-shadow: 0 -4px 7px rgba(black, 0.23) inset,
+                  0 -8px 25px rgba(black, 0.05) inset;
+
+      .image {
+        flex-grow: 0;
+        width: 64px;
+        height: 64px;
+        margin-right: 10px;
+        text-align: center;
+        background-color: color($ui-color, "50");
+        border-radius: 50%;
+        @include shadow(2);
+
+        i.fa {
+          font-size: 36px;
+          line-height: 64px;
+          color: color($active-color, "800");
+        }
+      }
+
+      .info {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: row;
+        align-items: flex-start;
+
+        .name {
+          flex-grow: 1;
+          color: #fff;
+          font-size: 1em;
+          font-weight: 500;
+          margin-right: 0.75em;
+          max-width: 200px;
+          @include truncate;
+        }
+      }
+    }
+
+    // profile section
+    #profile {
+      .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $header-user-image-size;
+        height: $header-user-image-size;
+        margin-right: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+
+        i.fa.fa-user {
+          font-size: 20px;
+          color: color($active-color, "700");
+        }
+      }
+
+      span {
+        flex-grow: 1;
+      }
+    }
+
+    // balance section
+    #balance {
+      span {
+        flex-grow: 0;
+        font-size: 24px;
+        font-weight: 700;
+        margin-right: 0.25em;
+      }
+      small {
+        flex-grow: 1;
+        align-self: flex-end;
+        margin-bottom: 0.25em;
+        text-transform: uppercase;
+        color: color($ui-color, "300");
+      }
+    }
+
+    // account section
+    #account {
+      display: flex;
+
+      a {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        height: 2.5em;
+        color: $header-menu-new-fg-color;
+        &:not(:last-child) {
+          border-right: $header-menu-border;
+        }
+        &:hover {
+          background-color: $header-menu-bg-color-hover;
+        }
+
+        .gutter {
+          width: auto;
+          padding: 0 1em;
+        }
+
+        span {
+          display: inline-block;
+          font-size: 0.9em;
+          font-weight: 100;
+        }
+      }
+    }
+  }
+}

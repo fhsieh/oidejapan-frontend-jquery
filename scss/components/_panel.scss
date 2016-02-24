@@ -1,0 +1,126 @@
+@import "../../node_modules/susy/sass/susy";
+@import "../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "globals";
+
+$panel-bg-color: color($ui-color, "50") !default;
+$panel-header-icon-color: color($ui-color, "300") !default;
+$panel-header-font-size: 2.5em !default;
+$panel-header-font-weight: 100 !default;
+
+
+$panel-wizard-border: 1px color($ui-color, "200") solid !default;
+
+$panel-wizard-header-bg-color: color($ui-color, "100") !default;
+$panel-wizard-header-fg-color: color($ui-color, "500") !default;
+$panel-wizard-header-fg-color-active: #000 !default;
+$panel-wizard-header-font-size: 1.25em !default;
+$panel-wizard-header-font-weight: 500 !default;
+
+$panel-wizard-header-number-fg-color: #fff !default;
+$panel-wizard-header-number-bg-color: color($ui-color, "300") !default;
+$panel-wizard-header-number-bg-color-active: color($active-color, "700") !default;
+$panel-wizard-header-number-size: 28px !default;
+
+$panel-wizard-header-addon-icon-size: 24px !default;
+
+
+/**
+ * Panels
+ */
+.panel {
+  > .header {
+    padding-bottom: 15px;
+    font-size: $panel-header-font-size;
+    font-weight: $panel-header-font-weight;
+
+    i.fa {
+      color: $panel-header-icon-color;
+      margin-right: 15px;
+    }
+  }
+
+  > .body {
+    background-color: $panel-bg-color;
+    padding: 15px;
+  }
+}
+
+
+
+/**
+ * Wizard
+ */
+.panel .wizard > .step {
+  border-top: $panel-wizard-border;
+  &:last-child {
+    border-bottom: $panel-wizard-border;
+  }
+  &.active .header {
+    color: $panel-wizard-header-fg-color-active;
+
+    .number {
+      background-color: $panel-wizard-header-number-bg-color-active;
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 15px;
+    color: $panel-wizard-header-fg-color;
+    background-color: $panel-wizard-header-bg-color;
+
+    .number {
+      flex-grow: 0;
+      display: inline-block;
+      width: $panel-wizard-header-number-size;
+      height: $panel-wizard-header-number-size;
+      line-height: $panel-wizard-header-number-size;
+      font-weight: 700;
+      text-align: center;
+      color: $panel-wizard-header-number-fg-color;
+      background-color: $panel-wizard-header-number-bg-color;
+      border-radius: 50%;
+      transition: $transition;
+    }
+
+    .title {
+      flex-grow: 1;
+      margin-left: 15px;
+      font-size: $panel-wizard-header-font-size;
+      font-weight: $panel-wizard-header-font-weight;
+      transition: $transition;
+    }
+
+    .addon {
+      flex-grow: 0;
+      min-width: 20px;
+      margin-left: 15px;
+      color: $panel-wizard-header-fg-color;
+
+      i.fa {
+        font-size: $panel-wizard-header-addon-icon-size;
+      }
+    }
+  }
+
+  .body {
+    padding: 15px;
+    font-weight: 200;
+    background-color: $panel-bg-color;
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px color($ui-color, "100") solid;
+
+      a, input[type="button"], input[type="submit"] {
+        margin-left: 4px;
+      }
+    }
+  }
+}

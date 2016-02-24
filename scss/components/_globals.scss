@@ -1,0 +1,80 @@
+@import "color";
+@import "shadow";
+
+/* Metrics */
+$header-height: 50px;
+$sidebar-width: 240px;
+$helpbar-width: 360px;
+
+/* Typography */
+$font-base: Roboto, 'Noto Sans Japanese';
+$font-condensed: 'Roboto Condensed';
+
+/* Colors */
+$ui-color: "blue-grey";
+$active-color: "blue";
+//$shadow-menu: 0 0 5px 0 rgba(0,0,0,0.16), 0 0 10px 0 rgba(0,0,0,0.12);
+//$shadow-objects: 1px 1px 2px rgba(0,0,0,0.4);
+
+/* Animations */
+$transition: all 100ms ease-in-out 0s;
+
+
+
+/**
+ * Global Styles
+ */
+* {
+  font-family: $font-base;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    list-style-position: outside;
+  }
+}
+
+a {
+  text-decoration: none;
+  transition: $transition;
+}
+
+
+
+/**
+ * Mixins
+ */
+@mixin bgStatus($shade: "700") {
+  &.primary {
+    background-color: color("blue", $shade);
+    border-bottom: 3px color("blue", "800") solid;
+  }
+  &.success {
+    background-color: color("green", $shade);
+    border-bottom: 3px color("green", "800") solid;
+  }
+  &.warning {
+    background-color: color("red", $shade);
+    border-bottom: 3px color("red", "800") solid;
+  }
+}
+
+@mixin truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+
+/**
+ * Opinions
+ */
+i.fa.fa-check {
+  color: color("teal", "500");
+//  text-shadow: 0 0 3px color("teal", "300");
+}

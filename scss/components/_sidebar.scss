@@ -1,0 +1,234 @@
+@import "../../node_modules/susy/sass/susy";
+@import "../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+@import "globals";
+
+$sidebar-bg-color: color($ui-color, "800") !default;
+$sidebar-fg-color: color($ui-color, "100") !default;
+$sidebar-fg-color-hover: color($ui-color, "50") !default;
+$sidebar-fg-color-active: #fff !default;
+
+$sidebar-company-height: 135px !default;
+$sidebar-company-bg-color: color($active-color, "900") !default;
+$sidebar-company-icon-size: 18px !default;
+$sidebar-company-image-size: 64px !default;
+$sidebar-company-name-font-size: 20px !default;
+$sidebar-company-name-font-weight: 500 !default;
+$sidebar-company-tag-font-size: 13px !default;
+$sidebar-company-tag-font-weight: 100 !default;
+
+$sidebar-item-height: 72px !default;
+$sidebar-item-icon-size: 24px !default;
+$sidebar-item-font-size: 16px !default;
+$sidebar-item-font-weight: 300 !default;
+$sidebar-item-bg-color-hover: rgba(255,255,255,0.05) !default;
+$sidebar-item-bg-color-active: color($active-color, "500") !default;
+$sidebar-item-border: 1px rgba(255,255,255,0.05) solid !default;
+$sidebar-item-caret-size: 16px !default;
+
+$sidebar-subitem-height: 54px !default;
+$sidebar-subitem-icon-size: 14px !default;
+$sidebar-subitem-font-size: 14px !default;
+$sidebar-subitem-font-weight: 100 !default;
+$sidebar-subitem-bg-color: color($ui-color, "900") !default;
+$sidebar-subitem-bg-color-hover: color($active-color, "700") !default;
+$sidebar-subitem-bg-color-active: color($active-color, "700") !default;
+
+/**
+ * Sidebar
+ */
+#sidebar {
+  background-color: $sidebar-bg-color;
+
+  a {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    outline: none;
+    color: $sidebar-fg-color;
+
+    i.fa {
+      flex: 0 0 48px;
+      text-align: center;
+    }
+
+    span {
+      flex: 1 0;
+    }
+  }
+
+  /* items */
+  .section {
+    position: relative;
+    border-bottom: $sidebar-item-border;
+
+    > a {
+      height: $sidebar-item-height;
+      &:hover, &:focus {
+        background-color: $sidebar-item-bg-color-hover;
+        color: $sidebar-fg-color-hover;
+      }
+      &.active {
+        background-color: $sidebar-item-bg-color-active;
+        color: $sidebar-fg-color-active;
+        &.menu::after {
+          transform: rotate(180deg);
+        }
+      }
+      &.menu::after {
+        font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transform: translate(0, 0);
+        font-size: $sidebar-item-caret-size;
+        display: inline-block;
+        position: absolute;
+        content: "\f107";
+        top: calc((#{$sidebar-item-height} / 2) - 8px);
+        right: 15px;
+        z-index: 1;
+      }
+
+      > i.fa {
+        font-size: $sidebar-item-icon-size;
+      }
+
+      > span {
+        font-size: $sidebar-item-font-size;
+        font-weight: $sidebar-item-font-weight;
+      }
+    }
+  }
+
+  /* subitems */
+  .content {
+    background-color: $sidebar-subitem-bg-color;
+
+    ul > li > a {
+      height: $sidebar-subitem-height;
+      &:hover, &:focus {
+        background-color: $sidebar-subitem-bg-color-hover;
+        color: $sidebar-fg-color-active;
+      }
+      &.active {
+        position: relative;
+        background-color: $sidebar-subitem-bg-color-active;
+        color: $sidebar-fg-color-active;
+        &::after {
+          content: '';
+          position: absolute;
+          top: calc(50% - 8px);
+          left: calc(100% - 8px);
+          width: 0;
+          height: 0;
+          border-top: 8px transparent solid;
+          border-bottom: 8px transparent solid;
+          border-right: 8px #fff solid;
+        }
+      }
+
+      > i.fa {
+        font-size: $sidebar-subitem-icon-size;
+      }
+
+      > span {
+        font-size: $sidebar-subitem-font-size;
+        font-weight: $sidebar-subitem-font-weight;
+      }
+    }
+  }
+}
+
+/**
+ * Company Logo
+ */
+
+#sidebar #company {
+  background-color: $sidebar-company-bg-color;
+  box-shadow: 0 -4px 7px rgba(black, 0.23) inset,
+              0 -8px 25px rgba(black, 0.05) inset;
+  a {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: $sidebar-company-height;
+    box-sizing: border-box;
+    padding: 15px;
+    &:hover {
+      background-color: rgba(255,255,255,0.05);
+
+      .name::after {
+        color: #fff;
+      }
+    }
+
+    .image {
+      display: inline-block;
+      width: $sidebar-company-image-size;
+      height: $sidebar-company-image-size;
+      text-align: center;
+      background-color: color($ui-color, "50");
+      box-sizing: border-box;
+      border-radius: 50%;
+      @include shadow(2);
+
+      i.fa {
+        font-size: 36px !important;
+        font-size: $sidebar-company-icon-size;
+        line-height: $sidebar-company-image-size;
+        color: color($active-color, "800");
+      }
+    }
+
+    .tag {
+      padding-top: 10px;
+      font-size: $sidebar-company-tag-font-size;
+      font-weight: $sidebar-company-tag-font-weight;
+      line-height: 1em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .name {
+      align-self: stretch;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: stretch;
+      justify-content: center;
+      position: relative;
+      margin-top: 5px;
+      font-size: $sidebar-company-name-font-size;
+      font-weight: $sidebar-company-name-font-weight;
+      color: #fff;
+      @include truncate;
+      &::after {
+        font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transform: translate(0, 0);
+        font-size: $sidebar-item-caret-size;
+        display: inline-block;
+        position: absolute;
+        content: "\f013"; // 107: angle down, 013 cog, 085 cogs
+        top: calc(50% - 8px);
+        right: 0px;
+        color: rgba(255,255,255,0.5);
+        z-index: 1;
+        transition: $transition;
+      }
+    }
+  }
+}
+
+#header > ul > li:first-child {
+  border-right: none;
+
+  #sidebar-toggle {
+    transition: $transition;
+    &:hover {
+      background-color: transparent;
+
+      > i.fa {
+        color: color($ui-color, "400");
+      }
+    }
+
+    > i.fa {
+      font-size: 21px;
+      color: color($ui-color, "300");
+    }
+  }
+}
