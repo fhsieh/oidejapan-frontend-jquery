@@ -3,11 +3,11 @@ Oide Japan Frontend (jQuery)
 
 Front-end UI/UX demo for Oide Japan using jQuery and Susy/Sass.
 
-![oidejapan-frontend-jquery-1](https://user-images.githubusercontent.com/9514732/32267512-db61d84a-bf2e-11e7-81a7-3a088f662f9c.gif)
+![Translation interface](https://user-images.githubusercontent.com/9514732/32267512-db61d84a-bf2e-11e7-81a7-3a088f662f9c.gif)
 
 Static UI/UX demo for the "New Translation" view of Oide Japan service. Header (notofication and profile dropdowns), Sidebar, Helpbar, and Translation wizard components are defined in `js` and loaded individually into `index.html` with sample static content.
 
-![oidejapan-frontend-jquery-2](https://user-images.githubusercontent.com/9514732/32267514-deae5a8c-bf2e-11e7-85ce-cf971fdd0642.gif)
+![Main interface](https://user-images.githubusercontent.com/9514732/32267514-deae5a8c-bf2e-11e7-85ce-cf971fdd0642.gif)
 
 Content and routing is intended to be handled on backend by server-side views (traditional Rails, Laravel, etc) with JS/CSS components compiled server-side into asset pipeline.
 
